@@ -13,7 +13,7 @@ import {
 export default function Home() {
 
   const { address, isConnected } = useAccount()
-  
+
   return (
     <>
       <Head>
@@ -24,7 +24,10 @@ export default function Home() {
       </Head>
       <Layout>
         {isConnected ? (
-          <Text>Welcome on Alyra DApp !</Text>
+          <div align="center">
+            Welcome to Punk Hazard Land !
+            < Image src="/PunkHazard.jpeg" alt="img" width={400} height={400} style={{ margin: 10 }} />
+          </div>
         ) : (
           <Alert status='warning' width="50%">
             <AlertIcon />
