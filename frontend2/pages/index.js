@@ -17,7 +17,6 @@ import NewPlayerForm from './player/NewPlayerForm'
 import Player from './player/[id]'
 import Link from 'next/link';
 
-
 export default function Home() {
   const [player, setPlayer] = useState(null);
   const { address, isConnected } = useAccount()
