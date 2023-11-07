@@ -11,6 +11,8 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { ChakraProvider } from '@chakra-ui/react'
 
+
+
 const { chains, provider } = configureChains(
   [hardhat],
   [
@@ -32,12 +34,12 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }) {
   return (
-    <ChakraProvider>
-      <WagmiConfig client={wagmiClient}>
-        <RainbowKitProvider chains={chains}>
-          <Component {...pageProps} />
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </ChakraProvider>
+      <ChakraProvider>
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            <Component {...pageProps} />
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </ChakraProvider>
   )
 }

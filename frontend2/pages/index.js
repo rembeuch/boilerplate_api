@@ -9,10 +9,35 @@ import {
   AlertTitle,
   AlertDescription,
 } from '@chakra-ui/react'
+import axios from "axios";
+import { useEffect, useState } from "react";
+
+import PlayersList from '@/features/Players/PlayersList'
+import NewPlayerForm from './player/NewPlayerForm'
+import Player from './player/[id]'
+import Link from 'next/link';
+
 
 export default function Home() {
-
+  const [player, setPlayer] = useState(null);
   const { address, isConnected } = useAccount()
+
+  async function getAPIData() {
+    const response = await fetch(`${`http://localhost:3000/api/v1/find?address=${address}`}`);
+    return response.json();
+  }
+
+  useEffect(() => {
+    let mounted = true;
+    getAPIData().then((item) => {
+      if (mounted) {
+        setPlayer(item);
+      }
+    });
+    return () => (mounted = false);
+  }, [address]);
+
+
 
   return (
     <>
@@ -24,9 +49,20 @@ export default function Home() {
       </Head>
       <Layout>
         {isConnected ? (
-          <div align="center">
-            Welcome to Punk Hazard Land !
-            < Image src="/PunkHazard.jpeg" alt="img" width={400} height={400} style={{ margin: 10 }} />
+          <div className="App">
+            <div>
+              {player ? (
+                <>
+                  <h2>{player.name}</h2>
+                  <p>{player.wallet_address}</p>
+                  <Link href="/player/[id]" as={`/player/${player.id}`}>
+                    Voir le player #{player.id}
+                  </Link>
+                </>
+              ) :
+                <NewPlayerForm />
+              }
+            </div>
           </div>
         ) : (
           <Alert status='warning' width="50%">

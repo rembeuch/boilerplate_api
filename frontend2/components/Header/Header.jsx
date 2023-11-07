@@ -51,8 +51,6 @@ const Header = () => {
             {isOwner ? (<button className='withdraw' onClick={withdraw}>WITHDRAW {balance} eth</button>) : ("")}
             <Flex width="30%" justifyContent="space-between" alignItems="center">
                 <Text><Link href="/">Home</Link></Text>
-                <Text><Link href="/mint">Mint a Land</Link></Text>
-                <Text><Link href="/collection">My Collection</Link></Text>
             </Flex>
             <ConnectButton />
         </Flex>
